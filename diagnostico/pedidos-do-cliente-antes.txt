@@ -1,0 +1,42 @@
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Gather Merge  (cost=24438.20..24438.67 rows=4 width=300) (actual time=593.606..610.593 rows=5 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   Buffers: shared hit=6759 read=14201
+   ->  Sort  (cost=23438.18..23438.18 rows=2 width=300) (actual time=585.579..585.584 rows=2 loops=3)
+         Sort Key: criado_em DESC, id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=6759 read=14201
+         Worker 0:  Sort Method: quicksort  Memory: 25kB
+         Worker 1:  Sort Method: quicksort  Memory: 25kB
+         ->  Parallel Seq Scan on pedidos  (cost=0.00..23438.17 rows=2 width=300) (actual time=200.958..585.288 rows=2 loops=3)
+               Filter: (cliente_id = 48272)
+               Rows Removed by Filter: 166665
+               Buffers: shared hit=6633 read=14201
+ Planning:
+   Buffers: shared hit=81 read=3
+ Planning Time: 8.810 ms
+ Execution Time: 611.030 ms
+(18 rows)
+
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=18367.94..18367.95 rows=4 width=20) (actual time=552.880..558.182 rows=2 loops=1)
+   Sort Key: id
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=9130 read=425
+   ->  Gather  (cost=1000.00..18367.90 rows=4 width=20) (actual time=552.645..558.166 rows=2 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=9130 read=425
+         ->  Parallel Seq Scan on itens_pedido  (cost=0.00..17367.50 rows=2 width=20) (actual time=503.039..526.674 rows=1 loops=3)
+               Filter: (pedido_id = 1)
+               Rows Removed by Filter: 499999
+               Buffers: shared hit=9130 read=425
+ Planning:
+   Buffers: shared hit=35
+ Planning Time: 2.032 ms
+ Execution Time: 558.222 ms
+(16 rows)
+
