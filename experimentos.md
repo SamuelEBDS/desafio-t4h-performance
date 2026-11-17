@@ -51,3 +51,22 @@ Os arquivos brutos estão em [resultados/](resultados/), nas rodadas `00-linha-d
 **Decisão.** Manter os dois índices. Em relação à linha de base, a vazão aumentou 114,8%, o p95 da API caiu 58,3% e o p95 da rota-alvo caiu 63,1%. A memória do banco aumentou 78,0 MiB e o p99 da API ainda ficou em 26,53 s na carga testada.
 
 Dados brutos das três rodadas em [21h02](resultados/20261116-210200-02-indice-pedidos-cliente/), [21h03](resultados/20261116-210329-02-indice-pedidos-cliente/) e [21h04](resultados/20261116-210459-02-indice-pedidos-cliente/).
+
+## Resumo das mudanças medidas
+
+| Mudança | Fonte | Status | Antes | Depois | Rodadas | Conclusão |
+|---|---|---|---|---|---|---|
+| Índice em `itens_pedido(pedido_id)` | [PostgreSQL 16, B-tree](https://www.postgresql.org/docs/16/indexes-types.html) | Aplicada e medida | 00. p95 geral 26.974,4 ms, 2,36 req/s | 01. p95 geral 18.812,0 ms, 3,17 req/s | [00](#rodadas-00) → [01](#rodadas-01) | A vazão subiu e o p50 piorou |
+| Índice em `pedidos(cliente_id)` | [PostgreSQL 16, B-tree](https://www.postgresql.org/docs/16/indexes-types.html) | Aplicada e medida | 01. p95 geral 18.812,0 ms, 3,17 req/s | 02. p95 geral 11.245,8 ms, 5,07 req/s | [01](#rodadas-01) → [02](#rodadas-02) | A vazão subiu e a latência caiu, com aumento de memória no banco |
+
+### Rodadas 00
+
+[1](resultados/20261116-124238-00-linha-de-base/) · [2](resultados/20261116-124425-00-linha-de-base/) · [3](resultados/20261116-124610-00-linha-de-base/)
+
+### Rodadas 01
+
+[1](resultados/20261116-135658-01-indice-itens-pedido/) · [2](resultados/20261116-135837-01-indice-itens-pedido/) · [3](resultados/20261116-140018-01-indice-itens-pedido/)
+
+### Rodadas 02
+
+[1](resultados/20261116-210200-02-indice-pedidos-cliente/) · [2](resultados/20261116-210329-02-indice-pedidos-cliente/) · [3](resultados/20261116-210459-02-indice-pedidos-cliente/)

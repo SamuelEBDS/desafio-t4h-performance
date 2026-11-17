@@ -405,3 +405,18 @@ Abra o agente dentro da sua cópia desta pasta. Na raiz do t4h-desafios, o `CLAU
 - Em caso de dúvidas, use o canal combinado na largada
 
 Boa sorte no seu desafio!
+
+## Resultado do desafio
+
+A rota de pedidos por cliente fazia varreduras nas tabelas `pedidos` e `itens_pedido`. Foram adicionados índices B-tree em `itens_pedido(pedido_id)` e `pedidos(cliente_id)`, com uma medição para cada mudança.
+
+| Métrica | Linha de base | Dois índices |
+|---|---:|---:|
+| Vazão | 2,36 req/s | 5,07 req/s |
+| p95 geral da API | 26,97 s | 11,25 s |
+| p95 da rota de pedidos do cliente | 31,31 s | 11,56 s |
+| Memória do banco | 288,8 MiB | 366,8 MiB |
+
+Os valores são as medianas de três rodadas por configuração, com 20 usuários virtuais por 60 segundos. A memória é a mediana das médias de cada rodada. Todas as nove verificações preservaram as 42 respostas do contrato.
+
+[Artigo](artigo/artigo.md) · [Experimentos e resultados brutos](experimentos.md) · [Próximos testes](proximos-testes.md)
