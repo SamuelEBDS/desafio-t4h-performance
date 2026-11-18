@@ -417,6 +417,6 @@ A rota de pedidos por cliente fazia varreduras nas tabelas `pedidos` e `itens_pe
 | p95 da rota de pedidos do cliente | 31,31 s | 11,56 s |
 | Memória do banco | 288,8 MiB | 366,8 MiB |
 
-Os valores são as medianas de três rodadas por configuração, com 20 usuários virtuais por 60 segundos. A memória é a mediana das médias de cada rodada. Todas as nove verificações preservaram as 42 respostas do contrato.
+Os valores são as medianas de três rodadas por configuração, com 20 usuários virtuais por 60 segundos. A memória é a mediana das médias reportadas em cada rodada, com a [limitação de precisão do resumo de recursos](experimentos.md#limitação-do-resumo-de-recursos). Todas as nove verificações preservaram as 42 respostas do contrato.
 
 [Artigo](artigo/artigo.md) · [Experimentos e resultados brutos](experimentos.md) · [Próximos testes](proximos-testes.md)

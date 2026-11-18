@@ -45,7 +45,7 @@ Escolhi manter os dois índices no cenário avaliado. Essa configuração elevou
 
 ## 6. Experimento e resultado
 
-Executei três rodadas por versão na mesma máquina, com 20 usuários virtuais e 60 s de medição por rodada. Usei a mediana de cada métrica entre as três rodadas. Para CPU e memória, primeiro considerei a média amostrada de cada contêiner por rodada. Comparei o primeiro índice com a linha de base e o segundo com a versão que já tinha o índice de itens. O p95 da tabela é o percentil 95 da latência de toda a API. [Script de medição](../scripts/medir.sh) · [Registro](../experimentos.md)
+Executei três rodadas por versão na mesma máquina, com 20 usuários virtuais e 60 s de carga. Calculei a mediana de cada métrica entre as rodadas. Para CPU e memória, usei as médias reportadas em `recursos.txt`, com a ressalva descrita na seção 7. Comparei o primeiro índice com a linha de base e o segundo com a versão que já tinha o índice de itens. O p95 da tabela é o percentil 95 da latência de toda a API. [Script de medição](../scripts/medir.sh) · [Registro](../experimentos.md)
 
 | Mudança | Hipótese | p95 antes → depois | req/s antes → depois | CPU e memória antes → depois | Pastas de resultados | Conclusão |
 |---|---|---:|---:|---|---|---|
@@ -57,6 +57,8 @@ Os planos posteriores registraram `Index Scan` nas duas consultas isoladas, com 
 ## 7. Limites e testes futuros
 
 Três rodadas curtas com dados sintéticos descrevem o cenário local. O modelo fechado permite que o volume efetivo de chamadas varie com o tempo de resposta. Os planos SQL são observações pontuais sujeitas ao estado do cache. Com os dois índices, o p99 geral ainda ficou em 26,53 s. [8][k6] [9][modelos] · [Medições](../experimentos.md)
+
+O resumo oficial de recursos perde frações das amostras neste ambiente e registra máximos de CPU inconsistentes. Apresento suas médias como aproximações. Cada CSV inclui uma amostra final extra ao resumo. A vazão e a latência vêm do k6. [Script](../scripts/medir.sh) · [Amostras e resumos](../resultados/)
 
 A vazão maior sob os mesmos limites indica melhor aproveitamento da configuração nesse teste. Para estimar economia em produção, mediria memória, disco e custo de escritas com uma taxa de chegada e uma meta de p95 definidas. Eu revisaria a escolha se, nas mesmas condições de chegada e com o contrato preservado, o ganho desaparecesse ou se o custo extra de armazenamento e de escrita superasse o ganho de capacidade. As fichas detalham os experimentos que podem orientar essa revisão. [Próximos testes](../proximos-testes.md)
 

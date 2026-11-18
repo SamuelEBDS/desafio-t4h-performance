@@ -70,3 +70,9 @@ Dados brutos das três rodadas em [21h02](resultados/20261116-210200-02-indice-p
 ### Rodadas 02
 
 [1](resultados/20261116-210200-02-indice-pedidos-cliente/) · [2](resultados/20261116-210329-02-indice-pedidos-cliente/) · [3](resultados/20261116-210459-02-indice-pedidos-cliente/)
+
+## Limitação do resumo de recursos
+
+Os valores de CPU e memória das tabelas reproduzem `recursos.txt`, gerado pelo script oficial. A comparação com `recursos.csv` mostrou perda das frações na conversão das amostras e máximos de CPU inconsistentes. Por isso, as médias de consumo devem ser tratadas como aproximações.
+
+Cada CSV contém uma amostra final por contêiner além da quantidade informada no resumo. A comparação deve considerar essa diferença ao recalcular as médias. Os dados brutos estão nas pastas de cada rodada, e vazão e latência foram conferidas com os resumos do k6.
